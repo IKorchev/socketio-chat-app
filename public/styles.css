@@ -1,0 +1,15 @@
+.output {
+  width: 100%;
+}
+.messageForm {
+  width: 75%;
+}
+.list-group-item {
+  word-wrap: break-word;
+}
+
+.colorInput {
+  height: 30px;
+  width: 80px;
+  border-radius: 5px;
+}
