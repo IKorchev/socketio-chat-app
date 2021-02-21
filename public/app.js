@@ -7,15 +7,19 @@ const chosenColor = document.querySelector(".colorInput")
 
 const username = prompt("Your name please ?")
 
-const formatData = (data, nameOfClass) => {
+const formatData = (data, h5ClassName, listItemClassName) => {
   output.innerHTML += `
-  <li class="list-group-item">
-    <h5 class="d-inline ${nameOfClass}">${data.name} </h5><i>says:</i>
+  <li class="list-group-item ${listItemClassName}">
+    <h5 class="d-inline ${h5ClassName}">${data.name} </h5><i>says:</i>
     <p class="mx-3 my-1">${data.msg}</p>
   </li>`
-  const array = document.querySelectorAll(`.${nameOfClass}`)
+  const array = document.querySelectorAll(`.${h5ClassName}`)
   array.forEach((item) => {
     item.style.color = data.color
+  })
+  const listItems = document.querySelectorAll(`.${listItemClassName}`)
+  listItems.forEach((item) => {
+    item.style.borderColor = data.color
   })
 }
 
@@ -28,7 +32,7 @@ sendBtn.addEventListener("click", (e) => {
   }
   if (data.msg !== "" && data.name !== "") {
     socket.emit("client-message", data)
-    formatData(data, "myName")
+    formatData(data, "myName", "list-item")
     message.value = ""
   } else {
     alert("Something went wrong! Please make sure to type your name and message to send!")
@@ -36,5 +40,5 @@ sendBtn.addEventListener("click", (e) => {
 })
 
 socket.on("server-message", (data) => {
-  formatData(data, "nameFromServer")
+  formatData(data, "nameFromServer", "other-list-item")
 })
