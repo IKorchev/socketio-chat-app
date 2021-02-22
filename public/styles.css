@@ -1,5 +1,11 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 .output {
-  width: 100%;
+  width: 75%;
 }
 .messageForm {
   width: 75%;
@@ -7,8 +13,9 @@
 .list-group-item {
   word-wrap: break-word;
   border-style: solid;
-  border-width: 3px;
-  border-radius: 8px !important;
+  border-width: 2px;
+  border-radius: 5px !important;
+  border-top-width: 2px !important;
 }
 
 .colorInput {
