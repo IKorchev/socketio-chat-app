@@ -4,7 +4,7 @@ const message = document.querySelector(".message")
 const sendBtn = document.querySelector(".sendBtn")
 const msgForm = document.querySelector(".messageForm")
 const chosenColor = document.querySelector(".colorInput")
-
+const notificationSound = document.querySelector("audio")
 const username = prompt("Your name please ?")
 
 const formatDate = () => {
@@ -37,6 +37,7 @@ const formatData = (data, color) => {
     item.style.color = `#${color}`
     item.style.borderColor = `#${color}`
   })
+  output.scrollTop = output.scrollHeight
 }
 
 sendBtn.addEventListener("click", (e) => {
@@ -46,7 +47,10 @@ sendBtn.addEventListener("click", (e) => {
     name: username,
     msg: message.value,
   }
-  if (data.msg !== "" && data.name !== "") {
+  if (data.name == "") {
+    data.name = "Guest"
+  }
+  if (data.msg !== "") {
     formatData(data, data.color)
     socket.emit("client-message", data)
     message.value = ""
@@ -57,4 +61,5 @@ sendBtn.addEventListener("click", (e) => {
 
 socket.on("server-message", (data) => {
   formatData(data, data.color)
+  notificationSound.play()
 })
