@@ -7,11 +7,20 @@ const chosenColor = document.querySelector(".colorInput")
 
 const username = prompt("Your name please ?")
 
-const formatData = (data, color) => {
-  const time = {
-    hour: new Date().getHours(),
-    minutes: new Date().getMinutes(),
+const formatDate = () => {
+  let hours = new Date().getHours()
+  let minutes = new Date().getMinutes()
+
+  if (hours <= 9) {
+    hours = `0${hours}`
   }
+  if (minutes <= 9) {
+    minutes = `0${minutes}`
+  }
+  return `${hours}:${minutes}`
+}
+
+const formatData = (data, color) => {
   output.innerHTML += `
   <li class="list-group-item mt-1 a${color}">
   <div class="d-flex flex-row justify-content-between">
@@ -19,7 +28,7 @@ const formatData = (data, color) => {
       <h4 class="d-inline a${color}">${data.name} </h4>
       <i class="fs-lg text-dark">says:</i>
     </div>
-    <i muted class="text-dark">${time.hour}:${time.minutes}</i>
+    <i muted class="text-dark">${formatDate()}</i>
   </div>
     <p class="mx-3 my-1 text-dark">${data.msg}</p>
   </li>`
