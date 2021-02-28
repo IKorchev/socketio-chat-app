@@ -5,7 +5,7 @@ const sendBtn = document.querySelector(".sendBtn")
 const msgForm = document.querySelector(".messageForm")
 const chosenColor = document.querySelector(".colorInput")
 const notificationSound = document.querySelector("audio")
-const username = prompt("Your name please ?")
+const username = prompt("Name:")
 
 const formatDate = () => {
   let hours = new Date().getHours()
@@ -19,7 +19,16 @@ const formatDate = () => {
   }
   return `${hours}:${minutes}`
 }
-
+const setHtml = (name, string) => {
+  return `<li class="list-group-item mt-1 py-3">
+<div class="d-flex flex-row justify-content-between">
+  <div>
+    <h4 class="d-inline">${name} ${string}</h4>
+  </div>
+  <i muted class="text-dark">${formatDate()}</i>
+</div>
+</li>`
+}
 const formatData = (data, color) => {
   output.innerHTML += `
   <li class="list-group-item mt-1 a${color}">
@@ -40,26 +49,43 @@ const formatData = (data, color) => {
   output.scrollTop = output.scrollHeight
 }
 
-sendBtn.addEventListener("click", (e) => {
+socket.on("connect", () => {
+  socket.emit("send-username", username)
+})
+socket.on("client-disconnected", (name) => {
+  output.innerHTML += setHtml(name, "has disconnected!")
+})
+
+const sendButtonHandler = (e) => {
   e.preventDefault()
   const data = {
     color: chosenColor.value.slice(1, 7),
     name: username,
     msg: message.value,
   }
-  if (data.name == "") {
+  if (!data.name || data.name == "") {
     data.name = "Guest"
   }
-  if (data.msg !== "") {
+  if (!data.msg || data.msg !== "") {
     formatData(data, data.color)
     socket.emit("client-message", data)
     message.value = ""
-  } else {
-    alert("Something went wrong! Please make sure to type your name and message to send!")
   }
-})
+}
 
 socket.on("server-message", (data) => {
   formatData(data, data.color)
   notificationSound.play()
 })
+socket.on("client-joined", (name) => {
+  if (!name) {
+    name = "Guest"
+  }
+  output.innerHTML += setHtml(name, "has joined the chat!")
+})
+
+socket.on("client-disconnected-message", (client) => {
+  console.log(`${client} has disconnected!`)
+})
+
+sendBtn.addEventListener("click", sendButtonHandler)
