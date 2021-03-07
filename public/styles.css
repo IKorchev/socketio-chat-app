@@ -5,23 +5,52 @@
 }
 
 .output {
-  width: 75%;
-  max-height: 500px;
+  width: 600px;
+  max-height: 450px;
   overflow: auto;
+  margin: 0 0 2rem 0 !important;
+  padding: 0;
 }
 .messageForm {
-  width: 75%;
+  width: 600px;
+  padding: 0;
 }
-.list-group-item {
+.users-in-chat {
+  opacity: 0;
+  margin: 0 10px;
+  border: 2px solid black !important;
+}
+.bla {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+.colorInput {
+  border-radius: 5px;
+}
+.messages {
   word-wrap: break-word;
-  border-style: solid;
-  border-width: 2px;
+  overflow: auto;
+  padding: 0 10px;
+  max-height: 100px;
+  border: 1px solid;
   border-radius: 5px !important;
-  border-top-width: 2px !important;
 }
 
-.colorInput {
-  height: 40px;
-  width: 80px;
-  border-radius: 5px;
+@media only screen and (max-width: 750px) {
+  .messageForm {
+    width: 500px;
+  }
+  .output {
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .messageForm {
+    width: 450px;
+  }
+  .output {
+    max-height: 300px;
+    width: 450px;
+  }
 }

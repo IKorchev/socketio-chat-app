@@ -6,6 +6,7 @@ const msgForm = document.querySelector(".messageForm")
 const inTheChat = document.querySelector(".in-the-chat")
 const chosenColor = document.querySelector(".colorInput")
 const notificationSound = document.querySelector("audio")
+const body = document.querySelector("body")
 const username = prompt("Name:")
 
 const formattedDate = () => {
@@ -33,15 +34,16 @@ const setHtml = (name, string) => {
 }
 const formatData = (data, color) => {
   output.innerHTML += `
-  <li class="list-group-item mt-1 a${color}">
-    <div class="d-flex flex-row justify-content-between">
+  <li class="messages mt-1 a${color}">
+    <div class="border-bottom p-1 d-flex flex-row justify-content-between">
       <div>
-        <h4 class="d-inline a${color}">${data.name} </h4>
+        <h4 class="mx-1 d-inline a${color}">${data.name} </h4>
         <i class="fs-lg text-dark">says:</i>
       </div>
-      <i class="text-dark">${formattedDate()}</i>
+      <i class="text-dark"><sup>${formattedDate()}</sup></i>
     </div>
-    <p class="mx-3 my-1 text-dark">${data.msg}</p>
+
+    <p class="mx-3 pt-2 text-dark">${data.msg}</p>
   </li>`
   const array = document.querySelectorAll(`.a${color}`)
   array.forEach((item) => {
@@ -61,15 +63,19 @@ const sendButtonHandler = (e) => {
   if (!data.name || data.name == "") {
     data.name = "Guest"
   }
-  if (!data.msg || data.msg !== "") {
+  if (data.msg === "") {
+    alert("Seems like you are trying to send an empty message. Please type something!")
+  } else {
     formatData(data, data.color)
     socket.emit("client-message", data)
-    message.value = ""
   }
+  message.value = ""
+  output.scrollTop = output.scrollHeight
 }
 
 socket.on("client-disconnected", (name) => {
   output.innerHTML += setHtml(name, "has disconnected!")
+  output.scrollTop = output.scrollHeight
 })
 
 socket.on("connect", () => {
@@ -77,9 +83,16 @@ socket.on("connect", () => {
 })
 
 socket.on("all-usernames", (usernames) => {
-  const string = usernames.toString().replace(",", ", ")
-  console.log(string)
-  inTheChat.textContent = `People in the chat: ${string}`
+  let html = ""
+  usernames.forEach((user) => {
+    html += `<li class="list-group-item users-in-chat"><strong>${user}</strong></li>`
+  })
+  inTheChat.innerHTML = html
+  document.querySelectorAll(".users-in-chat").forEach((item) => {
+    setTimeout(() => {
+      item.classList.add("bla")
+    }, 100)
+  })
 })
 
 socket.on("server-message", (data) => {
@@ -91,6 +104,7 @@ socket.on("client-joined", (name) => {
     name = "Guest"
   }
   output.innerHTML += setHtml(name, "has joined the chat!")
+  output.scrollTop = output.scrollHeight
 })
 socket.on("client-disconnected-message", (client) => {
   console.log(`${client} has disconnected!`)

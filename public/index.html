@@ -1,61 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://cdn.socket.io/3.1.1/socket.io.min.js"
-      integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="styles.css">
-    <title>Chat app</title>
-  </head>
-  <body>
-    <div class="main d-flex flex-column justify-content-center align-items-center">
-      <h1 class="text-center display-5 mt-5">Chat app</h1>
-      <div class="container text-center">
-        <h5 class="in-the-chat">People in the chat: </h5>
-      </div>
-      <div
-        class="container d-flex flex-column justify-content-center align-items-center mt-5"
-      >
-        <ul class="output mt-5"></ul>
-        <form class="my-3 messageForm d-flex flex-row">
-          <div class="input-group mb-3 w-25 colorDiv">
-            <span class="input-group-text">Color</span>
-            <input
-              type="color"
-              class="colorInput"
-              placeholder="color"
-            />
-          </div>       
-          <div class="input-group mb-3">
-            <span class="input-group-text" ">Message</span>
-            <input
-              type="text"
-              class="form-control message"
-              aria-label="Sizing example input"
-              aria-describedby="inputGroup-sizing-sm"
-            />
-            <button type="submit" class="sendBtn btn btn-secondary">Send</button>
-          </div>
-        </form>
-      </div>
-      <audio src="ding.mp3" hidden></audio>
-    </div>
 
-    <script src="app.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.socket.io/3.1.1/socket.io.min.js"
+    integrity="sha384-gDaozqUvc4HTgo8iZjwth73C6dDDeOJsAgpxBcMpZYztUfjHXpzrpdrHRdVp8ySO"
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+    crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="styles.css">
+  <title>Chat app</title>
+</head>
+
+<body>
+  <div class="main d-flex flex-column justify-content-center">
+    <h1 class="text-center display-4 my-2">Chat app</h1>
+    <div class="container">
+      <h5 class="text-center mt-5 mb-4 h5">Currently in the chat</h5>
+      <div class="container text-center">
+        <ul class="p-0 d-flex flex-row justify-content-center align-items-center in-the-chat"></ul>
+      </div>
+    </div>
+    <section class="container d-flex flex-column justify-content-center align-items-center mt-5">
+      <ul class="output"></ul>
+      <form class="my-3 messageForm">
+        <div class="input-group mb-3 colorDiv">
+          <input type="color" class="colorInput form-control-color" />
+          <span class="input-group-text">Message</span>
+          <input type=" text" class="form-control message" aria-label="Sizing example input"
+            aria-describedby="inputGroup-sizing-sm" />
+          <button type="submit" class="sendBtn btn btn-secondary">Send</button>
+        </div>
+      </form>
+    </section>
+    <audio src="ding.mp3" hidden></audio>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
 </html>
