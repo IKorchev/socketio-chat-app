@@ -29,8 +29,8 @@ body {
 .users-in-chat {
   opacity: 0;
   margin: 0 10px;
-  background-color: rgba(127, 209, 174, 0.5);
-  border: 2px solid #ffddd2 !important;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px !important;
 }
 .bla {
   opacity: 1;
@@ -54,8 +54,8 @@ body {
 .my-message {
   margin-right: 0;
   margin-left: auto;
-  background-color: rgba(127, 209, 174, 0.5);
-  /* backdrop-filter: blur(1px); */
+  background-color: rgba(255, 255, 255, 0.152);
+  backdrop-filter: blur(5px);
 }
 .message-text {
   color: black;
@@ -68,7 +68,7 @@ body {
   border: 1px solid rgb(235, 232, 232);
   border-radius: 10px;
   width: fit-content;
-  background-color: rgba(127, 209, 174, 0.05);
+  background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(1px);
 }
 

@@ -1,6 +1,5 @@
 const path = require("path")
 const express = require("express")
-const { randomBytes } = require("crypto")
 const app = express()
 const server = require("http").Server(app)
 const PORT = 5500
@@ -9,18 +8,7 @@ const io = require("socket.io")(server)
 server.listen(PORT, () => console.log(`Listening on port ${PORT}`))
 app.use(express.static(path.join(__dirname, "public")))
 
-const checkArray = (arr) => {
-  let num = 0
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === arr[i + 1]) {
-      num++
-      return `${arr[i + num]} (${num})`
-      break
-    } else {
-      return `${arr[i]}`
-    }
-  }
-}
+
 let peopleInChat = []
 io.on("connection", (socket) => {
   socket.on("send-username", (username) => {
