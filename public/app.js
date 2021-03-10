@@ -9,6 +9,10 @@ const notificationSound = document.querySelector("audio")
 const body = document.querySelector("body")
 const username = prompt("Name:")
 
+window.onload = () => {
+  message.focus()
+}
+
 const formattedDate = () => {
   let hours = new Date().getHours()
   let minutes = new Date().getMinutes()
@@ -22,28 +26,26 @@ const formattedDate = () => {
   return `${hours}:${minutes}`
 }
 
-const setHtml = (name, string) => {
-  return `<li class="list-group-item mt-1 py-3">
-<div class="d-flex flex-row justify-content-between">
-  <div>
-    <h4 class="d-inline">${name}</h4><span class="lead"> ${string} </span>
-  </div>
-  <i class="text-dark">${formattedDate()}</i>
-</div>
-</li>`
+const setHtml = (name, background, string) => {
+  return `<li class="client-action bg-${background} mt-1 p-3">
+            <div class="d-flex flex-row justify-content-between">
+              <div>
+                <h4 class="d-inline">${name}</h4><span class="lead"> ${string} </span>
+              </div>
+              <i class="text-dark">${formattedDate()}</i>
+            </div>
+          </li>`
 }
-const formatData = (data, color) => {
+const formatData = (data, color, classname) => {
   output.innerHTML += `
-  <li class="messages mt-1 a${color}">
-    <div class="border-bottom p-1 d-flex flex-row justify-content-between">
+  <li class="messages ${classname} mt-1">
+    <div class="border-bottom border-dark p-1 d-flex flex-row justify-content-between">
       <div>
-        <h4 class="mx-1 d-inline a${color}">${data.name} </h4>
-        <i class="fs-lg text-dark">says:</i>
+        <h5 class="d-inline a${color}">${data.name}</h5>
       </div>
       <i class="text-dark"><sup>${formattedDate()}</sup></i>
     </div>
-
-    <p class="mx-3 pt-2 text-dark">${data.msg}</p>
+    <p class="lead mx-3 pt-2 message-text">${data.msg}</p>
   </li>`
   const array = document.querySelectorAll(`.a${color}`)
   array.forEach((item) => {
@@ -66,7 +68,7 @@ const sendButtonHandler = (e) => {
   if (data.msg === "") {
     alert("Seems like you are trying to send an empty message. Please type something!")
   } else {
-    formatData(data, data.color)
+    formatData(data, data.color, "my-message")
     socket.emit("client-message", data)
   }
   message.value = ""
@@ -74,7 +76,7 @@ const sendButtonHandler = (e) => {
 }
 
 socket.on("client-disconnected", (name) => {
-  output.innerHTML += setHtml(name, "has disconnected!")
+  output.innerHTML += setHtml(name, "danger", "has disconnected!")
   output.scrollTop = output.scrollHeight
 })
 
@@ -91,7 +93,7 @@ socket.on("all-usernames", (usernames) => {
   document.querySelectorAll(".users-in-chat").forEach((item) => {
     setTimeout(() => {
       item.classList.add("bla")
-    }, 100)
+    }, 1)
   })
 })
 
@@ -103,7 +105,7 @@ socket.on("client-joined", (name) => {
   if (!name) {
     name = "Guest"
   }
-  output.innerHTML += setHtml(name, "has joined the chat!")
+  output.innerHTML += setHtml(name, "success", "has joined the chat!")
   output.scrollTop = output.scrollHeight
 })
 socket.on("client-disconnected-message", (client) => {
