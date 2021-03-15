@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css");
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  background: url("https://images.pexels.com/photos/242236/pexels-photo-242236.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+}
+h1 {
+  font-weight: 500 !important;
+  color: rgb(58, 46, 57);
+}
+.output {
+  width: 600px;
+  min-height: 100px;
+  height: 450px;
+  overflow: auto;
+  margin: 0 0 2rem 0 !important;
+  padding: 0;
+}
+
+.output::-webkit-scrollbar {
+  display: none;
+}
+
+.in-the-chat {
+  max-width: 800px;
+  margin: auto;
+}
+
+.messageForm {
+  width: 600px;
+  height: 40px;
+  padding: 0;
+  margin: 0 !important;
+}
+
+.transition-class {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+.colorInput {
+  border-radius: 5px;
+}
+.messages {
+  width: 400px;
+  word-wrap: break-word;
+  overflow: auto;
+  padding: 0 10px;
+  border: 1px solid white;
+  border-radius: 20px !important;
+  margin-left: 0;
+  background: rgba(244, 216, 205, 0.6);
+  backdrop-filter: blur(5px);
+}
+
+.user {
+  background-color: rgba(241, 81, 82, 0.5);
+}
+
+.my-message {
+  margin-right: 0;
+  margin-left: auto;
+  background-color: rgba(237, 177, 131, 0.6);
+  backdrop-filter: blur(5px);
+}
+.message-text {
+  color: black;
+  font-size: 1rem;
+  font-weight: bolder;
+  font-family: "Shippori Mincho", serif;
+}
+.content-container {
+  padding: 0 20px;
+  border: 1px solid rgb(235, 232, 232);
+  border-radius: 10px;
+  width: fit-content;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(1px);
+}
+
+.client-action {
+  border-radius: 20px;
+  opacity: 0.8;
+}
+
+@media only screen and (max-width: 1900px) {
+  .output {
+    height: 400px;
+  }
+}
+.display-none {
+  display: none;
+}
+@media only screen and (max-width: 766px) {
+  .messageForm {
+    width: 500px;
+  }
+  .output {
+    width: 500px;
+  }
+  .content-container {
+    width: 520px;
+  }
+  .messages {
+    width: 280px;
+  }
+  .in-the-chat {
+    width: 350px;
+    height: 100px;
+    overflow: auto;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  .messageForm {
+    width: 320px;
+  }
+  .output {
+    height: 300px;
+    width: 320px;
+  }
+  .content-container {
+    width: 320px;
+  }
+  .in-the-chat {
+    width: 200px;
+  }
+}
